@@ -62,4 +62,3 @@ def recog():
     print("Uploaded: ",result)
 
 
-recog()
