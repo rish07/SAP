@@ -62,4 +62,4 @@ except Exception:
 firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
 
 result = firebase.put('/','command',data[text.lower()])
-print(result)
+print("Uploaded: ",result)
