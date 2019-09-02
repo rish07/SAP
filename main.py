@@ -45,8 +45,12 @@ with output as source:
     r.adjust_for_ambient_noise(source, duration=0.5)
     audio = r.record(source)
 
+data = {'turn on the fan':1,'turn off the fan':2,'turn on the light one':3,'turn off the light one':4,'turn on the light two':5,'turn off the light two:':6}
+
+
 try:
     text = r.recognize_google(audio)
     print('Did you just say :', format(text))
+    print(data[text.lower()])
 except Exception:
     print('Sorry ! did not catch that. Shall we try again ? ')
