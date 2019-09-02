@@ -3,6 +3,8 @@ import speech_recognition as sr
 import pyaudio
 import wave
 
+from firebase import firebase
+
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
@@ -54,3 +56,10 @@ try:
     print(data[text.lower()])
 except Exception:
     print('Sorry ! did not catch that. Shall we try again ? ')
+
+
+
+firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
+
+result = firebase.put('/','command',data[text.lower()])
+print(result)
