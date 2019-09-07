@@ -3,6 +3,7 @@ def recog():
     import speech_recognition as sr
     import pyaudio
     import wave
+    import pyttsx3 
 
     from firebase import firebase
 
@@ -13,6 +14,11 @@ def recog():
     RECORD_SECONDS = 5
     WAVE_OUTPUT_FILENAME = "output.wav"
 
+    
+    jarvis = pyttsx3.init()
+    jarvis.say('Hi Rishi, What can I do for you?')
+    jarvis.runAndWait()
+    
     p = pyaudio.PyAudio()
 
     stream = p.open(format=FORMAT,channels=CHANNELS,rate=RATE,input=True,frames_per_buffer=CHUNK)
@@ -44,25 +50,30 @@ def recog():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.record(source)
 
-    data = {'reset':0,'turn on fan':1,'turn off fan':0,'turn on music':1,'turn off music':0,'turn on light':1,'turn off light':0,'turn on tv':1,'turn off tv':0}
+    data = {'reset':0,'turn on the fan':1,'turn off the fan':0,'turn on the music':1,'turn off the music':0,'turn on the light':1,'turn off the light':0,'turn on the tv':1,'turn off the tv':0}
 
     text = r.recognize_google(audio)
+    temp = text.split()
+    temp1 = temp[-1]
+    onoff = temp[1]
+    mod = 'Turning '+onoff+' the '+temp1
+    jarvis.say(mod)
+    jarvis.runAndWait()
     try:
         text = r.recognize_google(audio)
         print('Did you just say :', format(text))
         print(data[text.lower()])
     except Exception:
-        print('Sorry ! did not catch that. Shall we try again ? ')
+        jarvis.say('Sorry ! did not catch that. Shall we try again ? ')
 
-    temp = text.split()
-    temp = temp[-1]
+    
     
 
 
 
     firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
 
-    result = firebase.put('/',temp.lower(),data[text.lower()])
+    result = firebase.put('/',temp1.lower(),data[text.lower()])
     print("Uploaded: ",result)
 
 
