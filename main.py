@@ -1,2 +1,3 @@
 from processing import recog
-recog()
+while(True):
+    recog()

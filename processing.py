@@ -44,7 +44,7 @@ def recog():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.record(source)
 
-    data = {'reset':0,'turn on the fan':1,'turn off the fan':2,'turn on the light one':3,'turn off the light one':4,'turn on the light to':5,'turn off the light to':6}
+    data = {'reset':0,'turn on fan':1,'turn off fan':0,'turn on music':1,'turn off music':0,'turn on light':1,'turn off light':0,'turn on tv':1,'turn off tv':0}
 
     text = r.recognize_google(audio)
     try:
@@ -54,11 +54,15 @@ def recog():
     except Exception:
         print('Sorry ! did not catch that. Shall we try again ? ')
 
+    temp = text.split()
+    temp = temp[-1]
+    
+
 
 
     firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
 
-    result = firebase.put('/','command',data[text.lower()])
+    result = firebase.put('/',temp.lower(),data[text.lower()])
     print("Uploaded: ",result)
 
 
