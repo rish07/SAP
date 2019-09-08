@@ -16,7 +16,7 @@ def recog():
 
     
     sophia = pyttsx3.init()
-    sophia.say('Yes Rishi, What can I do for you?')
+    sophia.say('Yes, What can I do for you?')
     sophia.runAndWait()
     
     p = pyaudio.PyAudio()
