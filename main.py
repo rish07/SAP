@@ -11,13 +11,21 @@ while(True):
         
         audio = r.listen(source)
         
-        #JARVIS
+        #Sophia
         s = (r.recognize_google(audio))
         message = s.lower()
         print(message)
-        if (message == 'hey sophia' or message == 'hi sophia' or message == 'hey sofia' or message == 'hi sofia'):
+        if message == 'sofia':
+            message = 'sophia'
+        if ('sophia') in message:
             recog()
-        if(message == 'goodbye' or message == 'good bye'):
+        if(message == 'goodbye' or message == 'good bye' or message == 'no'):
             sophia.say('Goodbye,Sir!')
             sophia.runAndWait()
             break
+        if(message == 'thank you' or message == 'thankyou'):
+            sophia.say('Anything else sir?')
+            sophia.runAndWait()
+        if(message == 'yes'):
+            recog()
+        
