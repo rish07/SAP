@@ -1,23 +1,16 @@
 #include <ESP8266WiFi.h>
 
 #include <FirebaseArduino.h>
-#define a  D0
-#define b  D1
-#define c  D2
 
 #define HOST "https://sapj01.firebaseio.com/"
 #define AUTH "Y5XDIp40C18wMvOKSf0iyT4BTWmtFtTUcSKV3M5k"
 #define ssid "Insecure Channel"
 #define pass "divyansh"
 
-String path = "/" ;
+int t = 0;
 
 void setup() {
   Serial.begin(115200);
-  pinMode(A0,INPUT);
-  pinMode(D0,OUTPUT);
-  pinMode(D1,OUTPUT);
-  pinMode(D2,OUTPUT);
   
   // connect to wifi.
   WiFi.begin(ssid, pass);
@@ -34,23 +27,31 @@ void setup() {
 }
 
 void loop(){
+t=t+1;
+    
 
+    int temp = Firebase.getInt("temp");
+    Firebase.setFloat("abc",t);
+    delay(1000);
+//    int fan = Firebase.getFloat("fan");
+//    int light = Firebase.getInt("light");
+//    int tv = Firebase.getInt("tv");
+//    int music = Firebase.getInt("music");
     
-//getInteger()
-    int fan = Firebase.getInt("fan");
-    int light = Firebase.getInt("light");
-    int tv = Firebase.getInt("tv");
-    int music = Firebase.getInt("music");
-    delay(200);
-    Serial.println(fan);
-    Serial.println(light);
-    Serial.println(tv);
-    Serial.println(music);
-    Serial.println("........................");
-    
+//    Serial.println(fan);
+//    Serial.println(light);
+//    Serial.println(tv);
+//    Serial.println(music);
+  Serial.println(temp);
+  Serial.println(t);
+  Serial.println("........................");
+  
+  
     if (Firebase.failed()) {
       Serial.println(Firebase.error());  
       return;
   }
+
+  
   
 }
