@@ -11,11 +11,12 @@ def recog():
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
-    RECORD_SECONDS = 5
+    RECORD_SECONDS = 4
     WAVE_OUTPUT_FILENAME = "output.wav"
 
     
     sophia = pyttsx3.init()
+    
     sophia.say('Yes, What can I do for you?')
     sophia.runAndWait()
     
@@ -75,5 +76,7 @@ def recog():
 
     result = firebase.put('/',temp1.lower(),data[text.lower()])
     print("Uploaded: ",result)
+    sophia.say('Anything else, Sir?')
+    sophia.runAndWait()
 
 
