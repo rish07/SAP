@@ -15,9 +15,9 @@ def recog():
     WAVE_OUTPUT_FILENAME = "output.wav"
 
     
-    jarvis = pyttsx3.init()
-    jarvis.say('Hi Rishi, What can I do for you?')
-    jarvis.runAndWait()
+    sophia = pyttsx3.init()
+    sophia.say('Hi Rishi, What can I do for you?')
+    sophia.runAndWait()
     
     p = pyaudio.PyAudio()
 
@@ -57,14 +57,14 @@ def recog():
     temp1 = temp[-1]
     onoff = temp[1]
     mod = 'Turning '+onoff+' the '+temp1
-    jarvis.say(mod)
-    jarvis.runAndWait()
+    sophia.say(mod)
+    sophia.runAndWait()
     try:
         text = r.recognize_google(audio)
         print('Did you just say :', format(text))
         print(data[text.lower()])
     except Exception:
-        jarvis.say('Sorry ! did not catch that. Shall we try again ? ')
+        sophia.say('Sorry ! did not catch that. Shall we try again ? ')
 
     
     

@@ -1,7 +1,9 @@
 from processing import recog
 import speech_recognition as sr
 import pyttsx3 
-jarvis = pyttsx3.init()
+sophia = pyttsx3.init()
+voices = sophia.getProperty('voices')
+sophia.setProperty('voice', voices[1].id)
 while(True):
     print('listening')
     r = sr.Recognizer()
@@ -13,9 +15,9 @@ while(True):
         s = (r.recognize_google(audio))
         message = s.lower()
         print(message)
-        if (message == 'hey jarvis' or message == 'hi jarvis'):
+        if (message == 'hey sophia' or message == 'hi sophia' or message == 'hey sofia' or message == 'hi sofia'):
             recog()
         if(message == 'goodbye' or message == 'good bye'):
-            jarvis.say('Goodbye,Sir!')
-            jarvis.runAndWait()
+            sophia.say('Goodbye,Sir!')
+            sophia.runAndWait()
             break
