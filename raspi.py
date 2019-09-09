@@ -30,7 +30,8 @@ while True:
     GPIO.output(33, musicState)
     GPIO.output(35, lightState)
     
-
     print(fan," ",tv," ",music," ",light)
 
     time.sleep(1)
+
+GPIO.cleanup(29,31,33,35)
