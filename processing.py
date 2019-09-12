@@ -14,10 +14,10 @@ def recog():
     RECORD_SECONDS = 4
     WAVE_OUTPUT_FILENAME = "output.wav"
 
-    
+    firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
     sophia = pyttsx3.init()
     
-    sophia.say('Yes, What can I do for you?')
+    sophia.say('Yes Rishi, What can I do for you?')
     sophia.runAndWait()
     
     p = pyaudio.PyAudio()
@@ -51,32 +51,47 @@ def recog():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.record(source)
 
-    data = {'reset':0,'turn on the fan':1,'turn off the fan':0,'turn on the music':1,'turn off the music':0,'turn on the light':1,'turn off the light':0,'turn on the tv':1,'turn off the tv':0}
+    data = ['music','tv','fan','light']
+    onoff = ['on','off']
 
-    text = r.recognize_google(audio)
-    temp = text.split()
-    temp1 = temp[-1]
-    onoff = temp[1]
-    mod = 'Turning '+onoff+' the '+temp1
-    sophia.say(mod)
-    sophia.runAndWait()
+    
     try:
         text = r.recognize_google(audio)
         print('Did you just say :', format(text))
         print(data[text.lower()])
-    except Exception:
-        sophia.say('Sorry ! did not catch that. Shall we try again ? ')
+
+    except:
+        print('')
 
     
+    text = r.recognize_google(audio)
+    text = text.lower()
+    temp = text.split()
     
-
-
-
-    firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
-
-    result = firebase.put('/',temp1.lower(),data[text.lower()])
-    print("Uploaded: ",result)
+    for i in temp:
+        for j in data:
+            if i == j:
+                for k in temp:
+                    if k == onoff[1]:
+                        result = firebase.put('/',j,'0')
+                        mod = 'Turning off the '+j
+                        sophia.say(mod)
+                        sophia.runAndWait()
+                        print("Uploaded: ",result)
+                        
+                        
+                    if k == onoff[0]:
+                        result = firebase.put('/',j,'1')
+                        mod = 'Turning on the '+j
+                        sophia.say(mod)
+                        sophia.runAndWait()
+                        print("Uploaded: ",result)
+                        
+                        
+    
+    
     sophia.say('Anything else, Sir?')
-    sophia.runAndWait()
+    sophia.runAndWait() 
+
 
 

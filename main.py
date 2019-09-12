@@ -11,11 +11,12 @@ while(True):
         
         audio = r.listen(source)
         
-        #Sophia
+        #sophia
         s = (r.recognize_google(audio))
         message = s.lower()
         print(message)
-        if message == 'sofia':
+        u = 'sofia'
+        if u in message:
             message = 'sophia'
         if ('sophia') in message:
             recog()
