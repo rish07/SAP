@@ -67,13 +67,19 @@ def recog():
     text = r.recognize_google(audio)
     text = text.lower()
     temp = text.split()
+
+    if text == 'reset':
+        for i in data:
+            result = firebase.put('/',i,0)
+
+
     
     for i in temp:
         for j in data:
             if i == j:
                 for k in temp:
                     if k == onoff[1]:
-                        result = firebase.put('/',j,'0')
+                        result = firebase.put('/',j,0)
                         mod = 'Turning off the '+j
                         sophia.say(mod)
                         sophia.runAndWait()
@@ -81,7 +87,7 @@ def recog():
                         
                         
                     if k == onoff[0]:
-                        result = firebase.put('/',j,'1')
+                        result = firebase.put('/',j,1)
                         mod = 'Turning on the '+j
                         sophia.say(mod)
                         sophia.runAndWait()
