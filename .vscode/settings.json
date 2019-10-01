@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\RishiRaj\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+    "python.pythonPath": "/home/creator/test/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

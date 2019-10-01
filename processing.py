@@ -11,7 +11,7 @@ def recog():
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
-    RECORD_SECONDS = 4
+    RECORD_SECONDS = 5
     WAVE_OUTPUT_FILENAME = "output.wav"
 
     firebase = firebase.FirebaseApplication('https://sapj01.firebaseio.com/')
@@ -71,6 +71,7 @@ def recog():
     if text == 'reset':
         for i in data:
             result = firebase.put('/',i,0)
+            print("Uploaded: 0")
 
 
     
