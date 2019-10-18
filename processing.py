@@ -93,28 +93,29 @@ def recog():
                         sophia.say(mod)
                         sophia.runAndWait()
                         print("Uploaded: ",result)
-                      
+
+    count = 1                  
     if text != 'reset':
         o = temp[-1] 
         t = temp[1]             
         if o not in data:
             data.append(o)
             print(data)
+            b = 'temp' + str(count)
             if t == 'off':
-                result = firebase.put('/',o,0)
+                result = firebase.put('/',b,0)
                 mod = 'Turning off the '+o
                 sophia.say(mod)
                 sophia.runAndWait()
                 print("Uploaded: ",result)
+                count = count+1
             else:
-                result = firebase.put('/',o,1)
+                result = firebase.put('/',b,1)
                 mod = 'Turning on the '+o
                 sophia.say(mod)
                 sophia.runAndWait()
                 print("Uploaded: ",result)
+                count = count +1
         
     sophia.say('Anything else, Sir?')
     sophia.runAndWait() 
-
-
-
