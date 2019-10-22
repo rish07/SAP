@@ -51,7 +51,7 @@ def recog():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.record(source)
 
-    data = ['music','microwave','fan','light']
+    data = ['music','microwave','tv','light']
     onoff = ['on','off']
 
     
