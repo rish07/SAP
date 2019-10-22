@@ -51,7 +51,7 @@ def recog():
         r.adjust_for_ambient_noise(source, duration=0.5)
         audio = r.record(source)
 
-    data = ['music','tv','fan','light']
+    data = ['music','microwave','fan','light']
     onoff = ['on','off']
 
     
@@ -69,6 +69,7 @@ def recog():
     temp = text.split()
 
     if text == 'reset':
+        result = firebase.put('/','temp1',0)
         for i in data:
             result = firebase.put('/',i,0)
             print("Uploaded: 0")
